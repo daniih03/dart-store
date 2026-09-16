@@ -1,51 +1,51 @@
 {
   "version": 1,
-  "updated_at": "2026-09-16T18:56:01.051Z",
+  "updated_at": "2026-09-16T19:06:41.471Z",
   "games_count": 4,
   "games": [
     {
-      "id": "brick_breaker",
-      "title": "BRICK BREAKER",
-      "author": "BIT_STUDIO",
+      "id": "pong",
+      "title": "PONG",
+      "author": "DANIIH",
       "version": "1.0.0",
       "category": "ARCADE",
-      "size_kb": 28,
-      "description": "Rompe todos los bloques con tu pala y potenciadores de bola multiple, laser y escudo.",
-      "binary_url": "games/brick_breaker/game.cmd",
-      "cover_url": "games/brick_breaker/cover.bin"
+      "size_kb": 32,
+      "description": "Tenis de mesa retro 1-bit contra la CPU con aceleracion de pelota y dinamica de rebotes.",
+      "binary_url": "games/pong/game.cmd",
+      "cover_url": "games/pong/cover.bin"
     },
     {
-      "id": "dungeon_crawl",
-      "title": "DUNGEON CRAWL",
-      "author": "NIBBLE_DEV",
-      "version": "0.9.5",
-      "category": "RPG",
-      "size_kb": 64,
-      "description": "Explora mazmorras 1-bit procedurales, encuentra cofres misticos y derrota al nigromante oscuro.",
-      "binary_url": "games/dungeon_crawl/game.cmd",
-      "cover_url": "games/dungeon_crawl/cover.bin"
-    },
-    {
-      "id": "micro_racer",
-      "title": "MICRO RACER",
-      "author": "RETROLAB",
-      "version": "1.1.0",
-      "category": "CARRERAS",
-      "size_kb": 38,
-      "description": "Carreras cenitales en circuitos urbanos con curvas cerradas, turbos y derrapes al limite.",
-      "binary_url": "games/micro_racer/game.cmd",
-      "cover_url": "games/micro_racer/cover.bin"
-    },
-    {
-      "id": "space_shooter",
-      "title": "SPACE SHOOTER",
+      "id": "table_tennis",
+      "title": "TABLE TENNIS",
       "author": "DANIIH",
-      "version": "1.0.2",
-      "category": "ARCADE",
-      "size_kb": 42,
-      "description": "Defiende la galaxia contra oleadas enemigas con disparos laser continuos y jefes de sector.",
-      "binary_url": "games/space_shooter/game.cmd",
-      "cover_url": "games/space_shooter/cover.bin"
+      "version": "1.0.0",
+      "category": "DEPORTE",
+      "size_kb": 72,
+      "description": "Tenis de mesa 2.5D pseudo-3D bajo normativa oficial ITTF, tiros Drive/Slice y efectos de red.",
+      "binary_url": "games/table_tennis/game.cmd",
+      "cover_url": "games/table_tennis/cover.bin"
+    },
+    {
+      "id": "tetrix",
+      "title": "TETRIX",
+      "author": "DANIIH",
+      "version": "1.0.0",
+      "category": "PUZZLE",
+      "size_kb": 48,
+      "description": "Juego clasico de bloques con rotacion, ghost piece, aceleracion progresiva y combos a 60 FPS.",
+      "binary_url": "games/tetrix/game.cmd",
+      "cover_url": "games/tetrix/cover.bin"
+    },
+    {
+      "id": "zombies",
+      "title": "ZOMBIES",
+      "author": "DANIIH",
+      "version": "1.0.0",
+      "category": "SURVIVAL",
+      "size_kb": 85,
+      "description": "Supervivencia por rondas, barricadas, apuntado en 8 direcciones y oleadas crecientes de zombies.",
+      "binary_url": "games/zombies/game.cmd",
+      "cover_url": "games/zombies/cover.bin"
     }
   ]
 }

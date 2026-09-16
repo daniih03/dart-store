@@ -4,280 +4,607 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DART Store // Tienda Oficial de Juegos 1-Bit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #ccd1d9;
-            --ink: #181b20;
-            --card-bg: #e4e7eb;
-            --border: #181b20;
-            --accent: #2e3440;
+            /* Backgrounds (Garage v2 System) */
+            --bg-primary:    #121212;
+            --bg-secondary:  #181818;
+            --bg-panel:      #1E1E1E;
+            --bg-card:       #252525;
+            --bg-card-hover: #2E2E2E;
+            --bg-input:      #2A2A2A;
+
+            /* Accent */
+            --accent:        #a51500;
+            --accent-hover:  #c41900;
+            --accent-subtle: rgba(165, 21, 0, 0.16);
+            --accent-glow:   rgba(165, 21, 0, 0.35);
+
+            /* Text */
+            --text-primary:   #E8E8E8;
+            --text-secondary: #9E9E9E;
+            --text-muted:     #666666;
+
+            /* Borders */
+            --border:        #333333;
+            --border-subtle: #282828;
+
+            /* Shape & Shadows */
+            --radius-sm: 4px;
+            --radius:    8px;
+            --radius-lg: 12px;
+            --shadow-card:  0 2px 10px rgba(0,0,0,0.5);
+            --shadow-hover: 0 0 0 1px var(--accent), 0 8px 24px rgba(0,0,0,0.6);
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--ink);
-            font-family: 'Courier New', Courier, monospace;
-            padding: 24px 16px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font);
             line-height: 1.5;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(circle at 50% 0%, rgba(165, 21, 0, 0.12) 0%, transparent 60%);
+            background-repeat: no-repeat;
         }
 
-        .container {
-            max-width: 900px;
+        /* Top Navigation Bar */
+        nav.navbar {
+            background: rgba(24, 24, 24, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 14px 24px;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
             margin: 0 auto;
-        }
-
-        header {
-            border: 3px solid var(--border);
-            background: var(--ink);
-            color: #fff;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.25);
-        }
-
-        .brand {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 16px;
         }
 
-        .tagline {
-            font-size: 13px;
-            color: #a0a6b2;
-            margin-top: 6px;
-        }
-
-        .status-bar {
+        .brand-logo {
             display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: #fff;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-badge {
+            font-size: 10px;
+            background: var(--accent-subtle);
+            color: #ff5733;
+            border: 1px solid rgba(165, 21, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-panel);
+        }
+
+        .btn-github {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: var(--radius);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .btn-github:hover {
+            background: var(--bg-card);
+            border-color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px 64px 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 36px 0 32px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-subtle);
+            border: 1px solid rgba(165, 21, 0, 0.4);
+            color: #ff6b4a;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .hero-pill::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #ff4d29;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ff4d29;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 680px;
+        }
+
+        /* Stats & Controls Row */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 16px;
-            margin-top: 14px;
-            font-size: 12px;
-            border-top: 1px dashed #555;
-            padding-top: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 14px 20px;
+            margin-top: 12px;
+            margin-bottom: 32px;
         }
 
-        .status-badge {
-            background: #2b303a;
-            padding: 2px 8px;
-            border-radius: 2px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 6px;
-            margin: 28px 0 16px 0;
+        .stats-group {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 20px;
+            font-size: 13px;
         }
 
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .stat-item strong {
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .api-link {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #ff7b5a;
+            background: var(--bg-card);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: border-color 0.15s;
+        }
+
+        .api-link:hover {
+            border-color: var(--accent);
+        }
+
+        /* Grid */
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
         }
 
+        /* Game Card (Garage Card Spec) */
         .game-card {
-            border: 2px solid var(--border);
-            background: var(--card-bg);
-            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 3px 3px 0px var(--border);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
         .game-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--border);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(165, 21, 0, 0.6);
+            background: var(--bg-card-hover);
         }
 
-        .card-header {
+        .card-top {
             display: flex;
-            gap: 14px;
+            gap: 16px;
             align-items: flex-start;
-            margin-bottom: 12px;
+        }
+
+        /* 1-Bit Sharp LCD Frame */
+        .cover-frame {
+            width: 76px;
+            height: 76px;
+            background: #ccd1d9; /* Sharp LCD reflective silver */
+            border: 2px solid #181b20;
+            border-radius: var(--radius-sm);
+            padding: 2px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         .cover-canvas {
-            width: 72px;
-            height: 72px;
+            width: 68px;
+            height: 68px;
             image-rendering: pixelated;
-            border: 2px solid var(--border);
-            background: #fff;
-            flex-shrink: 0;
+            display: block;
         }
 
-        .card-meta {
+        .card-info {
             flex-grow: 1;
         }
 
         .game-title {
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 4px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+            margin-bottom: 2px;
         }
 
         .game-author {
-            font-size: 11px;
-            color: #555;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
         }
 
         .badges {
             display: flex;
             gap: 6px;
-            margin-top: 6px;
+            margin-top: 8px;
             flex-wrap: wrap;
         }
 
         .badge {
-            font-size: 10px;
-            background: var(--ink);
-            color: #fff;
-            padding: 1px 6px;
-            font-weight: bold;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
         }
 
-        .badge.category {
-            background: #fff;
-            color: var(--ink);
-            border: 1px solid var(--ink);
+        .badge-category {
+            background: var(--accent-subtle);
+            color: #ff5733;
+            border: 1px solid rgba(165, 21, 0, 0.3);
+        }
+
+        .badge-size {
+            background: var(--bg-panel);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .badge-version {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
         }
 
         .game-desc {
-            font-size: 12px;
-            margin: 10px 0 16px 0;
-            color: #222;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 16px 0 20px 0;
             flex-grow: 1;
         }
 
-        .card-actions {
-            border-top: 1px solid #c0c4cc;
-            padding-top: 12px;
+        .card-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 14px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 12px;
         }
 
+        .file-name {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Buttons (Garage Style) */
         .btn-download {
-            background: var(--ink);
-            color: #fff;
+            background: var(--accent);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: var(--radius);
             text-decoration: none;
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            border: 1px solid var(--ink);
-            transition: background 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+            box-shadow: 0 2px 8px var(--accent-glow);
         }
 
         .btn-download:hover {
-            background: #fff;
-            color: var(--ink);
+            background: var(--accent-hover);
+            box-shadow: 0 4px 14px var(--accent-glow);
         }
 
-        .info-box {
-            border: 2px solid var(--border);
-            background: #fff;
-            padding: 18px;
-            margin-top: 32px;
+        .btn-download:active {
+            transform: scale(0.97);
         }
 
-        .info-box h3 {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
+        /* How to Install Section (Garage Panel) */
+        .info-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .info-panel h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .step-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .step-num {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: var(--font-mono);
             text-transform: uppercase;
-        }
-
-        .info-box ol {
-            padding-left: 20px;
-            font-size: 12px;
-        }
-
-        .info-box li {
+            letter-spacing: 1px;
             margin-bottom: 6px;
         }
 
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 11px;
-            color: #666;
-            border-top: 1px dashed var(--border);
-            padding-top: 16px;
+        .step-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
         }
 
-        a {
-            color: var(--ink);
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="#" class="brand-logo">
+                <div class="brand-icon">D</div>
+                <div class="brand-name">
+                    DART STORE
+                    <span class="brand-badge">OFFICIAL</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="https://github.com/daniih03/dart-store/blob/main/README.md" target="_blank" class="nav-link">Guía Developer</a>
+                <a href="https://github.com/daniih03/dart-store" target="_blank" class="btn-github">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
     <div class="container">
-        <header>
-            <div class="brand">
-                <span>🎮 DART // STORE</span>
-                <span style="font-size: 14px; font-weight: normal;">SHARP MEMORY LCD 1-BIT</span>
+        
+        <!-- Hero Header -->
+        <section class="hero">
+            <div class="hero-pill">SHARP MEMORY LCD 400x240 // 1-BIT MONOCHROME</div>
+            <h1>Catálogo Oficial de Videojuegos</h1>
+            <p>Red de distribución abierta, escalable y ultraeficiente para la consola portátil DART (ESP32-S3). Descarga títulos en streaming directo a tu MicroSD sin coste de servidor.</p>
+        </section>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stats-group">
+                <div class="stat-item">
+                    <span>Títulos:</span>
+                    <strong id="stat-count">4</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Estado CDN:</span>
+                    <strong style="color: #27AE60;">ONLINE</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Target:</span>
+                    <strong>ESP32-S3</strong>
+                </div>
             </div>
-            <div class="tagline">Catálogo oficial y servidor de distribución de videojuegos para la consola portátil DART (ESP32-S3).</div>
-            <div class="status-bar">
-                <div class="status-badge">📡 ENDPOINT: <span style="color:#7ee787">catalog.json</span></div>
-                <div class="status-badge">📦 REPO: <a href="https://github.com/daniih03/dart-store" target="_blank" style="color:#58a6ff;">github.com/daniih03/dart-store</a></div>
-                <div class="status-badge" id="games-stat">JUEGOS DISPONIBLES: 4</div>
+            <a href="catalog.json" target="_blank" class="api-link">
+                📡 GET /dart-store/catalog.json
+            </a>
+        </div>
+
+        <!-- Catalog Grid -->
+        <div class="catalog-grid" id="games-container">
+            <!-- Cards populated dynamically via JavaScript -->
+        </div>
+
+        <!-- How to Install Instructions (Garage Panel) -->
+        <div class="info-panel">
+            <h2>
+                <span>⚡</span> ¿Cómo descargar juegos en tu consola DART?
+            </h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">Paso 01</div>
+                    <div class="step-text">Conecta tu consola DART a tu red Wi-Fi desde el menú de <strong>Ajustes > Conectividad</strong>.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Paso 02</div>
+                    <div class="step-text">En el Menú Home, pulsa <strong>[MENU]</strong> para desplegar el panel lateral <strong>System Drawer</strong>.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Paso 03</div>
+                    <div class="step-text">Selecciona la opción <strong>TIENDA</strong> y pulsa <strong>(A)</strong> para explorar el catálogo en tiempo real.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Paso 04</div>
+                    <div class="step-text">Pulsa <strong>(A) DESCARGAR</strong>: el binario se guardará en tu MicroSD (<code>/sd/games/</code>) listo para jugar.</div>
+                </div>
             </div>
-        </header>
-
-        <div class="section-title">
-            <span>Catálogo de Videojuegos</span>
-            <span style="font-size: 12px; font-weight: normal;" id="updated-stat">Sincronizado</span>
         </div>
 
-        <div class="catalog-grid" id="catalog-container">
-            <!-- Renderizado dinámico vía JavaScript -->
-        </div>
-
-        <div class="info-box">
-            <h3>¿Cómo instalar juegos en tu consola DART?</h3>
-            <ol>
-                <li>Enciende tu consola **DART** y conéctate a una red Wi-Fi desde **Ajustes**.</li>
-                <li>En el Menú Home, pulsa el botón físico **[MENU]** para abrir el **System Drawer**.</li>
-                <li>Selecciona **TIENDA** y pulsa **(A)** para explorar el catálogo sincronizado en tiempo real.</li>
-                <li>Elige el título que quieras y pulsa **(A)** para descargarlo por streaming directo a tu tarjeta MicroSD.</li>
-                <li>¡El juego se añadirá inmediatamente a tu consola sin necesidad de reiniciar!</li>
-            </ol>
-        </div>
-
+        <!-- Footer -->
         <footer>
-            DART Handheld Console Project © 2026 // Arquitectura de distribución abierta sin servidores mediante GitHub Pages.
+            <div>DART Handheld Console Project © 2026 // Motor determinista en C a 60 FPS sobre ESP32-S3.</div>
+            <div>Servidor estático de distribución en GitHub Pages con diseño Garage v2.</div>
         </footer>
+
     </div>
 
+    <!-- Script to Load Catalog & Render 1-Bit Covers -->
     <script>
-        async function loadStore() {
+        async function initStore() {
             let catalog = null;
             try {
                 const res = await fetch('catalog.json');
                 if (res.ok) catalog = await res.json();
-            } catch (err) {
-                console.warn("Could not fetch catalog.json dynamically, using fallback data");
+            } catch (e) {
+                console.warn("fetch catalog.json fallback triggered");
             }
 
             if (!catalog) {
@@ -287,60 +614,55 @@
                     games_count: 4,
                     games: [
                         {
-                            id: "brick_breaker",
-                            title: "BRICK BREAKER",
-                            author: "BIT_STUDIO",
+                            id: "tetrix",
+                            title: "TETRIX",
+                            author: "DANIIH",
+                            version: "1.0.0",
+                            category: "PUZZLE",
+                            size_kb: 48,
+                            description: "Juego clasico de bloques con rotacion, ghost piece, aceleracion progresiva y combos a 60 FPS.",
+                            binary_url: "games/tetrix/game.cmd",
+                            cover_url: "games/tetrix/cover.bin"
+                        },
+                        {
+                            id: "pong",
+                            title: "PONG",
+                            author: "DANIIH",
                             version: "1.0.0",
                             category: "ARCADE",
-                            size_kb: 28,
-                            description: "Rompe todos los bloques con tu pala y potenciadores de bola multiple, laser y escudo.",
-                            binary_url: "games/brick_breaker/game.cmd",
-                            cover_url: "games/brick_breaker/cover.bin"
+                            size_kb: 32,
+                            description: "Tenis de mesa retro 1-bit contra la CPU con aceleracion de pelota y dinamica de rebotes.",
+                            binary_url: "games/pong/game.cmd",
+                            cover_url: "games/pong/cover.bin"
                         },
                         {
-                            id: "dungeon_crawl",
-                            title: "DUNGEON CRAWL",
-                            author: "NIBBLE_DEV",
-                            version: "0.9.5",
-                            category: "RPG",
-                            size_kb: 64,
-                            description: "Explora mazmorras 1-bit procedurales, encuentra cofres misticos y derrota al nigromante oscuro.",
-                            binary_url: "games/dungeon_crawl/game.cmd",
-                            cover_url: "games/dungeon_crawl/cover.bin"
-                        },
-                        {
-                            id: "micro_racer",
-                            title: "MICRO RACER",
-                            author: "RETROLAB",
-                            version: "1.1.0",
-                            category: "CARRERAS",
-                            size_kb: 38,
-                            description: "Carreras cenitales en circuitos urbanos con curvas cerradas, turbos y derrapes al limite.",
-                            binary_url: "games/micro_racer/game.cmd",
-                            cover_url: "games/micro_racer/cover.bin"
-                        },
-                        {
-                            id: "space_shooter",
-                            title: "SPACE SHOOTER",
+                            id: "table_tennis",
+                            title: "TABLE TENNIS",
                             author: "DANIIH",
-                            version: "1.0.2",
-                            category: "ARCADE",
-                            size_kb: 42,
-                            description: "Defiende la galaxia contra oleadas enemigas con disparos laser continuos y jefes de sector.",
-                            binary_url: "games/space_shooter/game.cmd",
-                            cover_url: "games/space_shooter/cover.bin"
+                            version: "1.0.0",
+                            category: "DEPORTE",
+                            size_kb: 72,
+                            description: "Tenis de mesa 2.5D pseudo-3D bajo normativa oficial ITTF, tiros Drive/Slice y efectos de red.",
+                            binary_url: "games/table_tennis/game.cmd",
+                            cover_url: "games/table_tennis/cover.bin"
+                        },
+                        {
+                            id: "zombies",
+                            title: "ZOMBIES",
+                            author: "DANIIH",
+                            version: "1.0.0",
+                            category: "SURVIVAL",
+                            size_kb: 85,
+                            description: "Supervivencia por rondas, barricadas, apuntado en 8 direcciones y oleadas crecientes de zombies.",
+                            binary_url: "games/zombies/game.cmd",
+                            cover_url: "games/zombies/cover.bin"
                         }
                     ]
                 };
             }
 
-            document.getElementById('games-stat').textContent = `JUEGOS DISPONIBLES: ${catalog.games_count}`;
-            if (catalog.updated_at) {
-                const date = new Date(catalog.updated_at);
-                document.getElementById('updated-stat').textContent = `Actualizado: ${date.toLocaleDateString()}`;
-            }
-
-            const container = document.getElementById('catalog-container');
+            document.getElementById('stat-count').textContent = catalog.games_count;
+            const container = document.getElementById('games-container');
             container.innerHTML = '';
 
             for (const game of catalog.games) {
@@ -348,71 +670,74 @@
                 card.className = 'game-card';
                 card.innerHTML = `
                     <div>
-                        <div class="card-header">
-                            <canvas class="cover-canvas" width="48" height="48" id="cover-${game.id}"></canvas>
-                            <div class="card-meta">
-                                <div class="game-title">${game.title}</div>
-                                <div class="game-author">POR: ${game.author}</div>
+                        <div class="card-top">
+                            <div class="cover-frame">
+                                <canvas class="cover-canvas" width="48" height="48" id="cover-${game.id}"></canvas>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="game-title">${game.title}</h3>
+                                <div class="game-author">DESARROLLADOR: ${game.author}</div>
                                 <div class="badges">
-                                    <span class="badge category">${game.category}</span>
-                                    <span class="badge">${game.version}</span>
-                                    <span class="badge">${game.size_kb} KB</span>
+                                    <span class="badge badge-category">${game.category}</span>
+                                    <span class="badge badge-version">v${game.version}</span>
+                                    <span class="badge badge-size">${game.size_kb} KB</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="game-desc">${game.description}</div>
+                        <p class="game-desc">${game.description}</p>
                     </div>
-                    <div class="card-actions">
-                        <span style="font-size: 11px; color: #555;">${game.binary_url.split('/').pop()}</span>
-                        <a href="${game.binary_url}" class="btn-download" download>DESCARGAR</a>
+                    <div class="card-footer">
+                        <span class="file-name">${game.binary_url.split('/').pop()}</span>
+                        <a href="${game.binary_url}" class="btn-download" download>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            DESCARGAR
+                        </a>
                     </div>
                 `;
                 container.appendChild(card);
-
-                // Render 1-bit cover
-                renderCoverBitmap(game.id, game.cover_url);
+                renderCover(game.id, game.cover_url);
             }
         }
 
-        async function renderCoverBitmap(gameId, coverUrl) {
+        async function renderCover(gameId, coverUrl) {
             const canvas = document.getElementById(`cover-${gameId}`);
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
 
             try {
                 const res = await fetch(coverUrl);
-                if (!res.ok) throw new Error("fetch failed");
+                if (!res.ok) throw new Error("cover fetch error");
                 const arrayBuf = await res.arrayBuffer();
                 const bytes = new Uint8Array(arrayBuf);
 
                 const imgData = ctx.createImageData(48, 48);
-                // 48x48 = 2304 pixels. bytes length = 288.
                 for (let y = 0; y < 48; y++) {
                     for (let x = 0; x < 48; x++) {
                         const byteIdx = (y * 6) + Math.floor(x / 8);
                         const bit = (bytes[byteIdx] >> (7 - (x % 8))) & 1;
                         const pixelIdx = (y * 48 + x) * 4;
-                        const color = (bit === 1) ? 24 : 255;
+                        // Sharp Memory LCD Reflective palette
+                        const color = (bit === 1) ? 24 : 204;
                         imgData.data[pixelIdx + 0] = color;
-                        imgData.data[pixelIdx + 1] = color;
-                        imgData.data[pixelIdx + 2] = color;
+                        imgData.data[pixelIdx + 1] = (bit === 1) ? 27 : 209;
+                        imgData.data[pixelIdx + 2] = (bit === 1) ? 32 : 217;
                         imgData.data[pixelIdx + 3] = 255;
                     }
                 }
                 ctx.putImageData(imgData, 0, 0);
             } catch (e) {
-                // Procedural fallback if CORS or local file
-                ctx.fillStyle = '#fff';
+                // Procedural fallback
+                ctx.fillStyle = '#ccd1d9';
                 ctx.fillRect(0, 0, 48, 48);
                 ctx.strokeStyle = '#181b20';
                 ctx.strokeRect(1, 1, 46, 46);
                 ctx.fillStyle = '#181b20';
-                ctx.font = 'bold 8px Courier New';
-                ctx.fillText(gameId.substring(0, 6).toUpperCase(), 6, 26);
+                ctx.font = 'bold 8px Inter, monospace';
+                ctx.fillText(gameId.substring(0, 6).toUpperCase(), 4, 26);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', loadStore);
+        window.addEventListener('DOMContentLoaded', initStore);
     </script>
 </body>
 </html>

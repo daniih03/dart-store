@@ -1,0 +1,11 @@
+{
+  "id": "tetrix",
+  "title": "TETRIX",
+  "author": "DANIIH",
+  "version": "1.0.0",
+  "category": "PUZZLE",
+  "size_kb": 48,
+  "description": "Juego clasico de bloques con rotacion, ghost piece, aceleracion progresiva y combos a 60 FPS.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}

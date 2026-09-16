@@ -1,0 +1,11 @@
+{
+  "id": "table_tennis",
+  "title": "TABLE TENNIS",
+  "author": "DANIIH",
+  "version": "1.0.0",
+  "category": "DEPORTE",
+  "size_kb": 72,
+  "description": "Tenis de mesa 2.5D pseudo-3D bajo normativa oficial ITTF, tiros Drive/Slice y efectos de red.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}

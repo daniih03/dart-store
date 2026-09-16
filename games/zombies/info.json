@@ -1,0 +1,11 @@
+{
+  "id": "zombies",
+  "title": "ZOMBIES",
+  "author": "DANIIH",
+  "version": "1.0.0",
+  "category": "SURVIVAL",
+  "size_kb": 85,
+  "description": "Supervivencia por rondas, barricadas, apuntado en 8 direcciones y oleadas crecientes de zombies.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}

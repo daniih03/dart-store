@@ -1,0 +1,11 @@
+{
+  "id": "pong",
+  "title": "PONG",
+  "author": "DANIIH",
+  "version": "1.0.0",
+  "category": "ARCADE",
+  "size_kb": 32,
+  "description": "Tenis de mesa retro 1-bit contra la CPU con aceleracion de pelota y dinamica de rebotes.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}
