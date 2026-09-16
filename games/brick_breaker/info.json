@@ -1,0 +1,11 @@
+{
+  "id": "brick_breaker",
+  "title": "BRICK BREAKER",
+  "author": "BIT_STUDIO",
+  "version": "1.0.0",
+  "category": "ARCADE",
+  "size_kb": 28,
+  "description": "Rompe todos los bloques con tu pala y potenciadores de bola multiple, laser y escudo.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}

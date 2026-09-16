@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART Store // Tienda Oficial de Juegos 1-Bit</title>
+    <style>
+        :root {
+            --bg: #ccd1d9;
+            --ink: #181b20;
+            --card-bg: #e4e7eb;
+            --border: #181b20;
+            --accent: #2e3440;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: 'Courier New', Courier, monospace;
+            padding: 24px 16px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border: 3px solid var(--border);
+            background: var(--ink);
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.25);
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tagline {
+            font-size: 13px;
+            color: #a0a6b2;
+            margin-top: 6px;
+        }
+
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 14px;
+            font-size: 12px;
+            border-top: 1px dashed #555;
+            padding-top: 10px;
+        }
+
+        .status-badge {
+            background: #2b303a;
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 6px;
+            margin: 28px 0 16px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 18px;
+        }
+
+        .game-card {
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 3px 3px 0px var(--border);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .game-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--border);
+        }
+
+        .card-header {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .cover-canvas {
+            width: 72px;
+            height: 72px;
+            image-rendering: pixelated;
+            border: 2px solid var(--border);
+            background: #fff;
+            flex-shrink: 0;
+        }
+
+        .card-meta {
+            flex-grow: 1;
+        }
+
+        .game-title {
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .game-author {
+            font-size: 11px;
+            color: #555;
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 10px;
+            background: var(--ink);
+            color: #fff;
+            padding: 1px 6px;
+            font-weight: bold;
+        }
+
+        .badge.category {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+        }
+
+        .game-desc {
+            font-size: 12px;
+            margin: 10px 0 16px 0;
+            color: #222;
+            flex-grow: 1;
+        }
+
+        .card-actions {
+            border-top: 1px solid #c0c4cc;
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-download {
+            background: var(--ink);
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            border: 1px solid var(--ink);
+            transition: background 0.15s;
+        }
+
+        .btn-download:hover {
+            background: #fff;
+            color: var(--ink);
+        }
+
+        .info-box {
+            border: 2px solid var(--border);
+            background: #fff;
+            padding: 18px;
+            margin-top: 32px;
+        }
+
+        .info-box h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .info-box ol {
+            padding-left: 20px;
+            font-size: 12px;
+        }
+
+        .info-box li {
+            margin-bottom: 6px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px dashed var(--border);
+            padding-top: 16px;
+        }
+
+        a {
+            color: var(--ink);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <span>🎮 DART // STORE</span>
+                <span style="font-size: 14px; font-weight: normal;">SHARP MEMORY LCD 1-BIT</span>
+            </div>
+            <div class="tagline">Catálogo oficial y servidor de distribución de videojuegos para la consola portátil DART (ESP32-S3).</div>
+            <div class="status-bar">
+                <div class="status-badge">📡 ENDPOINT: <span style="color:#7ee787">catalog.json</span></div>
+                <div class="status-badge">📦 REPO: <a href="https://github.com/daniih03/dart-store" target="_blank" style="color:#58a6ff;">github.com/daniih03/dart-store</a></div>
+                <div class="status-badge" id="games-stat">JUEGOS DISPONIBLES: 4</div>
+            </div>
+        </header>
+
+        <div class="section-title">
+            <span>Catálogo de Videojuegos</span>
+            <span style="font-size: 12px; font-weight: normal;" id="updated-stat">Sincronizado</span>
+        </div>
+
+        <div class="catalog-grid" id="catalog-container">
+            <!-- Renderizado dinámico vía JavaScript -->
+        </div>
+
+        <div class="info-box">
+            <h3>¿Cómo instalar juegos en tu consola DART?</h3>
+            <ol>
+                <li>Enciende tu consola **DART** y conéctate a una red Wi-Fi desde **Ajustes**.</li>
+                <li>En el Menú Home, pulsa el botón físico **[MENU]** para abrir el **System Drawer**.</li>
+                <li>Selecciona **TIENDA** y pulsa **(A)** para explorar el catálogo sincronizado en tiempo real.</li>
+                <li>Elige el título que quieras y pulsa **(A)** para descargarlo por streaming directo a tu tarjeta MicroSD.</li>
+                <li>¡El juego se añadirá inmediatamente a tu consola sin necesidad de reiniciar!</li>
+            </ol>
+        </div>
+
+        <footer>
+            DART Handheld Console Project © 2026 // Arquitectura de distribución abierta sin servidores mediante GitHub Pages.
+        </footer>
+    </div>
+
+    <script>
+        async function loadStore() {
+            let catalog = null;
+            try {
+                const res = await fetch('catalog.json');
+                if (res.ok) catalog = await res.json();
+            } catch (err) {
+                console.warn("Could not fetch catalog.json dynamically, using fallback data");
+            }
+
+            if (!catalog) {
+                catalog = {
+                    version: 1,
+                    updated_at: new Date().toISOString(),
+                    games_count: 4,
+                    games: [
+                        {
+                            id: "brick_breaker",
+                            title: "BRICK BREAKER",
+                            author: "BIT_STUDIO",
+                            version: "1.0.0",
+                            category: "ARCADE",
+                            size_kb: 28,
+                            description: "Rompe todos los bloques con tu pala y potenciadores de bola multiple, laser y escudo.",
+                            binary_url: "games/brick_breaker/game.cmd",
+                            cover_url: "games/brick_breaker/cover.bin"
+                        },
+                        {
+                            id: "dungeon_crawl",
+                            title: "DUNGEON CRAWL",
+                            author: "NIBBLE_DEV",
+                            version: "0.9.5",
+                            category: "RPG",
+                            size_kb: 64,
+                            description: "Explora mazmorras 1-bit procedurales, encuentra cofres misticos y derrota al nigromante oscuro.",
+                            binary_url: "games/dungeon_crawl/game.cmd",
+                            cover_url: "games/dungeon_crawl/cover.bin"
+                        },
+                        {
+                            id: "micro_racer",
+                            title: "MICRO RACER",
+                            author: "RETROLAB",
+                            version: "1.1.0",
+                            category: "CARRERAS",
+                            size_kb: 38,
+                            description: "Carreras cenitales en circuitos urbanos con curvas cerradas, turbos y derrapes al limite.",
+                            binary_url: "games/micro_racer/game.cmd",
+                            cover_url: "games/micro_racer/cover.bin"
+                        },
+                        {
+                            id: "space_shooter",
+                            title: "SPACE SHOOTER",
+                            author: "DANIIH",
+                            version: "1.0.2",
+                            category: "ARCADE",
+                            size_kb: 42,
+                            description: "Defiende la galaxia contra oleadas enemigas con disparos laser continuos y jefes de sector.",
+                            binary_url: "games/space_shooter/game.cmd",
+                            cover_url: "games/space_shooter/cover.bin"
+                        }
+                    ]
+                };
+            }
+
+            document.getElementById('games-stat').textContent = `JUEGOS DISPONIBLES: ${catalog.games_count}`;
+            if (catalog.updated_at) {
+                const date = new Date(catalog.updated_at);
+                document.getElementById('updated-stat').textContent = `Actualizado: ${date.toLocaleDateString()}`;
+            }
+
+            const container = document.getElementById('catalog-container');
+            container.innerHTML = '';
+
+            for (const game of catalog.games) {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="card-header">
+                            <canvas class="cover-canvas" width="48" height="48" id="cover-${game.id}"></canvas>
+                            <div class="card-meta">
+                                <div class="game-title">${game.title}</div>
+                                <div class="game-author">POR: ${game.author}</div>
+                                <div class="badges">
+                                    <span class="badge category">${game.category}</span>
+                                    <span class="badge">${game.version}</span>
+                                    <span class="badge">${game.size_kb} KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-desc">${game.description}</div>
+                    </div>
+                    <div class="card-actions">
+                        <span style="font-size: 11px; color: #555;">${game.binary_url.split('/').pop()}</span>
+                        <a href="${game.binary_url}" class="btn-download" download>DESCARGAR</a>
+                    </div>
+                `;
+                container.appendChild(card);
+
+                // Render 1-bit cover
+                renderCoverBitmap(game.id, game.cover_url);
+            }
+        }
+
+        async function renderCoverBitmap(gameId, coverUrl) {
+            const canvas = document.getElementById(`cover-${gameId}`);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            try {
+                const res = await fetch(coverUrl);
+                if (!res.ok) throw new Error("fetch failed");
+                const arrayBuf = await res.arrayBuffer();
+                const bytes = new Uint8Array(arrayBuf);
+
+                const imgData = ctx.createImageData(48, 48);
+                // 48x48 = 2304 pixels. bytes length = 288.
+                for (let y = 0; y < 48; y++) {
+                    for (let x = 0; x < 48; x++) {
+                        const byteIdx = (y * 6) + Math.floor(x / 8);
+                        const bit = (bytes[byteIdx] >> (7 - (x % 8))) & 1;
+                        const pixelIdx = (y * 48 + x) * 4;
+                        const color = (bit === 1) ? 24 : 255;
+                        imgData.data[pixelIdx + 0] = color;
+                        imgData.data[pixelIdx + 1] = color;
+                        imgData.data[pixelIdx + 2] = color;
+                        imgData.data[pixelIdx + 3] = 255;
+                    }
+                }
+                ctx.putImageData(imgData, 0, 0);
+            } catch (e) {
+                // Procedural fallback if CORS or local file
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, 48, 48);
+                ctx.strokeStyle = '#181b20';
+                ctx.strokeRect(1, 1, 46, 46);
+                ctx.fillStyle = '#181b20';
+                ctx.font = 'bold 8px Courier New';
+                ctx.fillText(gameId.substring(0, 6).toUpperCase(), 6, 26);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadStore);
+    </script>
+</body>
+</html>

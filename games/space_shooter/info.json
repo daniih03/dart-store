@@ -1,0 +1,11 @@
+{
+  "id": "space_shooter",
+  "title": "SPACE SHOOTER",
+  "author": "DANIIH",
+  "version": "1.0.2",
+  "category": "ARCADE",
+  "size_kb": 42,
+  "description": "Defiende la galaxia contra oleadas enemigas con disparos laser continuos y jefes de sector.",
+  "binary_file": "game.cmd",
+  "cover_file": "cover.bin"
+}
